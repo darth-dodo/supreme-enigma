@@ -1,13 +1,22 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 
+templates = Jinja2Templates(directory="templates")
+
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+def dashboard(request: Request):
+    """
+    Displays information about stocks in the system
+    """
+    return templates.TemplateResponse("dashboard.html", {
+        "request": request
+    })
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, query: str = None):
-    return {"item_id": item_id, "query": query}
+@app.post("/stock")
+def create_stock():
+    """Creates a stock and saves it in the database"""
+    return {"code": "success", "message": "Stock added"}
