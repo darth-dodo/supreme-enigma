@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="ui input">
+    <input type="text" placeholder="P/E Ration">
+  </div>
+
+  <div class="ui input">
+    <input type="text" placeholder="Dividend Yield">
+  </div>
+
+  <div class="ui checkbox">
+    <input type="checkbox" name="example">
+    <label>Above 50 day MA</label>
+  </div>
+
+  <div class="ui checkbox">
+    <input type="checkbox" name="example">
+    <label>Above 200 day MA</label>
+  </div>
+
+
+
+  <button class="ui button primary">
+    Filter
+  </button>
+  
+<table class="ui celled table">
+    <thead>
+      <tr><th>Symbol</th>
+      <th>P/E</th>
+      <th>Dividend Yield</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td data-label="Symbol">MSFT</td>
+        <td data-label="P/E">24</td>
+        <td data-label="Dividend Yield">32</td>
+      </tr>
+      <tr>
+        <td data-label="Symbol">AAPL</td>
+        <td data-label="P/E">26</td>
+        <td data-label="Dividend Yield">2</td>
+      </tr>
+      <tr>
+        <td data-label="Symbol">GOOG</td>
+        <td data-label="P/E">24</td>
+        <td data-label="Dividend Yield">1</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %} 

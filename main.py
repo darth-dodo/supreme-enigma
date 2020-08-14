@@ -1,14 +1,19 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 
+templates = Jinja2Templates(directory="templates")
+
 
 @app.get("/")
-def dashboard():
+def dashboard(request: Request):
     """
     Displays information about stocks in the system
     """
-    return {"Dashboard": "Homepage"}
+    return templates.TemplateResponse("dashboard.html", {
+        "request": request
+    })
 
 
 @app.post("/stock")
