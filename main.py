@@ -54,7 +54,15 @@ def dashboard(
         stocks = stocks.filter(Stock.price < Stock.ma200)
 
     return templates.TemplateResponse(
-        "dashboard.html", {"request": request, "stocks": stocks}
+        "dashboard.html",
+        {
+            "request": request,
+            "stocks": stocks,
+            "forward_pe": forward_pe,
+            "dividend_yield": dividend_yield,
+            "ma50": ma50,
+            "ma200": ma200,
+        },
     )
 
 

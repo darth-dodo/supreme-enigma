@@ -38,22 +38,27 @@
 <form>
 
     <div class="ui input">
-        <input name="forward_pe" type="text" placeholder="P/E Ratio (Less than)">
+        <input name="forward_pe" type="text" placeholder="P/E Ratio (Less than)" value={{ forward_pe }}>
     </div>
 
     <div class="ui input">
-        <input name="dividend_yield" type="text" placeholder="Dividend Yield (Greater than)">
+        <input name="dividend_yield" type="text" placeholder="Dividend Yield (Greater than)" value={{ dividend_yield }}>
     </div>
 
+    <br/>
+    <br/>
+
     <div class="ui checkbox">
-        <input name="ma50" type="checkbox" name="example">
+        <input name="ma50" type="checkbox" {% if ma50 %}checked="checked"{% endif %}>
         <label>Above 50 day MA (Price less than MA50)</label>
     </div>
-
     <div class="ui checkbox">
-        <input name="ma200" type="checkbox" name="example">
+        <input name="ma200" type="checkbox" {% if ma200 %}checked="checked"{% endif %}>
         <label>Above 200 day MA (Price less than MA200)</label>
     </div>
+
+    <br/>
+    <br/>
 
     <button id="filterSubmit" class="ui button primary">
     Filter
