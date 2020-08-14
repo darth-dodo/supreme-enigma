@@ -38,11 +38,11 @@
 <form>
 
     <div class="ui input">
-        <input name="forward_pe" type="text" placeholder="P/E Ratio (Less than)" value={{ forward_pe }}>
+        <input name="forward_pe" type="text" placeholder="P/E Ratio (Less than)" {% if forward_pe %} value={{ forward_pe }} {% endif %}>
     </div>
 
     <div class="ui input">
-        <input name="dividend_yield" type="text" placeholder="Dividend Yield (Greater than)" value={{ dividend_yield }}>
+        <input name="dividend_yield" type="text" placeholder="Dividend Yield (Greater than)" {% if dividend_yield %} value={{ dividend_yield }} {% endif %}>
     </div>
 
     <br/>
