@@ -5,6 +5,7 @@ from database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from models import Stock
+import yfinance as yf
 
 app = FastAPI()
 
@@ -36,7 +37,18 @@ def dashboard(request: Request):
 def fetch_stock_data(id: int):
     db = SessionLocal()
     stock = db.query(Stock).filter(Stock.id == id).first()
-    stock.forward_pe = 10
+
+    yahoo_data = yf.Ticker(stock.symbol)
+    result = yahoo_data.info
+
+    stock.ma200 = result["twoHundredDayAverage"]
+    stock.ma50 = result["fiftyDayAverage"]
+    stock.price = result["previousClose"]
+    stock.forward_pe = result["forwardPE"]
+    stock.forward_eps = result["forwardEps"]
+
+    if result["dividendYield"]:
+        stock.dividend_yield = result["dividendYield"] * 100
 
     db.add(stock)
     db.commit()
