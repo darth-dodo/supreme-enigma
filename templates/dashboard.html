@@ -67,26 +67,26 @@
     <thead>
         <tr>
             <th>Symbol</th>
-            <th>P/E</th>
+            <th>Price</th>
+            <th>Forward P/E</th>
+            <th>Forward EPS</th>
             <th>Dividend Yield</th>
+            <th>50 Day</th>
+            <th>200 Day</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td data-label="Symbol">MSFT</td>
-            <td data-label="P/E">24</td>
-            <td data-label="Dividend Yield">32</td>
-        </tr>
-        <tr>
-            <td data-label="Symbol">AAPL</td>
-            <td data-label="P/E">26</td>
-            <td data-label="Dividend Yield">2</td>
-        </tr>
-        <tr>
-            <td data-label="Symbol">GOOG</td>
-            <td data-label="P/E">24</td>
-            <td data-label="Dividend Yield">1</td>
-        </tr>
+        {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.symbol or '-' }}</td>
+                <td>{{ stock.price or '-' }}</td>
+                <td>{{ stock.forward_pe or '-' }}</td>
+                <td>{{ stock.forward_eps or '-' }}</td>
+                <td>{{ stock.dividend_yield or '-' }}</td>
+                <td>{{ stock.ma50 or '-' }}</td>
+                <td>{{ stock.ma200 or '-' }}</td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 

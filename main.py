@@ -27,11 +27,16 @@ def get_db():
 
 
 @app.get("/")
-def dashboard(request: Request):
+def dashboard(request: Request, db: Session = Depends(get_db)):
     """
     Displays information about stocks in the system
     """
-    return templates.TemplateResponse("dashboard.html", {"request": request})
+
+    stocks = db.query(Stock).all()
+
+    print(stocks)
+
+    return templates.TemplateResponse("dashboard.html", {"request": request, "stocks": stocks})
 
 
 def fetch_stock_data(id: int):
