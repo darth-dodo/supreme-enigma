@@ -73,3 +73,9 @@ sqlite>
   ]
 }
 ```
+
+
+#### Dependency Injection
+- *Executing something depends on executing something else*
+- Creating a stock depends on getting a database connection from the application
+- This way we can use the `db` inside the controller layer
