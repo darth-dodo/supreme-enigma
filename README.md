@@ -3,8 +3,6 @@
 ## Table of contents:
 - [Setup and Install](#setup-and-install)
 - [Hello World demo](#hello-work-demo)
-- [Stocks Dashboard](#stocks-dashboard)
-    - [Database Design](#database-design)
 
 ## Setup and Install
 - Install Pyenv and set the local python version to 3.8.3
@@ -24,27 +22,3 @@
 ## Stocks Dashboard
 - Head to http:localhost:8000/docs for API documentation
 - Head to http:localhost:8000 for list of all the stocks
-
-### Database Design
-- Database is created using SQLite and SQLAlchemy as the ORM
-- The database structure is as follows:
-```
-(supreme-enignma-rOVS3nom-py3.8) ➜  supreme-enigma git:(feature/database-design) ✗ sqlite3 stocks.db
-SQLite version 3.24.0 2018-06-04 14:10:15
-Enter ".help" for usage hints.
-sqlite> .schema
-CREATE TABLE stocks (
-        id INTEGER NOT NULL, 
-        symbol VARCHAR, 
-        price NUMERIC(10, 2), 
-        forward_pe NUMERIC(10, 2), 
-        forward_eps NUMERIC(10, 2), 
-        dividend_yield NUMERIC(10, 2), 
-        ma50 NUMERIC(10, 2), 
-        ma200 NUMERIC(10, 2), 
-        PRIMARY KEY (id)
-);
-CREATE UNIQUE INDEX ix_stocks_symbol ON stocks (symbol);
-CREATE INDEX ix_stocks_id ON stocks (id);
-sqlite> 
-```
