@@ -4,86 +4,111 @@
 
 
 <script>
-    $(document).ready(function() {
-        $("#addStocks").click(function() {
+    $(document).ready(function () {
+        $("#addStocks").click(function () {
             $(".ui.modal").modal("show");
-        });
+        })
+
+        $("#save").click(function () {
+
+            var symbols = $("#symbols").val();
+
+            var stockSymbols = symbols.split("\n")
+
+            console.log(stockSymbols);
+
+            for (var i = 0; i < stockSymbols.length; ++i) {
+                console.log(stockSymbols[i]);
+
+                $.ajax({
+                    url: "/stock",
+                    type: "POST",
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "symbol": stockSymbols[i] })
+                });
+            }
+
+            $(".ui.modal").modal("hide");
+
+        })
     })
 </script>
 
 
 <div class="ui input">
     <input type="text" placeholder="P/E Ration">
-  </div>
+</div>
 
-  <div class="ui input">
+<div class="ui input">
     <input type="text" placeholder="Dividend Yield">
-  </div>
+</div>
 
-  <div class="ui checkbox">
+<div class="ui checkbox">
     <input type="checkbox" name="example">
     <label>Above 50 day MA</label>
-  </div>
+</div>
 
-  <div class="ui checkbox">
+<div class="ui checkbox">
     <input type="checkbox" name="example">
     <label>Above 200 day MA</label>
-  </div>
+</div>
 
 
 
-  <button class="ui button primary">
+<button class="ui button primary">
     Filter
-  </button>
-  
-    <button id="addStocks" class="ui button">
-        Add Stocks
-    </button>
+</button>
+
+<button id="addStocks" class="ui button">
+    Add Stocks
+</button>
 
 <table class="ui celled table">
     <thead>
-      <tr><th>Symbol</th>
-      <th>P/E</th>
-      <th>Dividend Yield</th>
-    </tr></thead>
+        <tr>
+            <th>Symbol</th>
+            <th>P/E</th>
+            <th>Dividend Yield</th>
+        </tr>
+    </thead>
     <tbody>
-      <tr>
-        <td data-label="Symbol">MSFT</td>
-        <td data-label="P/E">24</td>
-        <td data-label="Dividend Yield">32</td>
-      </tr>
-      <tr>
-        <td data-label="Symbol">AAPL</td>
-        <td data-label="P/E">26</td>
-        <td data-label="Dividend Yield">2</td>
-      </tr>
-      <tr>
-        <td data-label="Symbol">GOOG</td>
-        <td data-label="P/E">24</td>
-        <td data-label="Dividend Yield">1</td>
-      </tr>
+        <tr>
+            <td data-label="Symbol">MSFT</td>
+            <td data-label="P/E">24</td>
+            <td data-label="Dividend Yield">32</td>
+        </tr>
+        <tr>
+            <td data-label="Symbol">AAPL</td>
+            <td data-label="P/E">26</td>
+            <td data-label="Dividend Yield">2</td>
+        </tr>
+        <tr>
+            <td data-label="Symbol">GOOG</td>
+            <td data-label="P/E">24</td>
+            <td data-label="Dividend Yield">1</td>
+        </tr>
     </tbody>
-  </table>
+</table>
 
-  <div class="ui modal">
+<div class="ui modal">
     <i class="close icon"></i>
     <div class="header">
-      Stock Symbol
+        Stock Symbol
     </div>
     <div class="content">
         <div class="ui form">
             <div class="field">
-              <label>Enter Stock Symbol</label>
-              <textarea></textarea>
+                <label>Enter Stock Symbol</label>
+                <textarea id="symbols"></textarea>
             </div>
-          </div>
+        </div>
     </div>
 
     <div class="actions">
-      <div id="addStocks" class="ui positive right labeled icon button">
-        Add Stocks
-        <i class="plus icon"></i>
-      </div>
+        <div id="save" class="ui positive right labeled icon button">
+            Add Stocks
+            <i class="plus icon"></i>
+        </div>
     </div>
-  </div>
-{% endblock %} 
+</div>
+{% endblock %}
