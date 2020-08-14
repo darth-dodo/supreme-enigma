@@ -79,3 +79,10 @@ sqlite>
 - *Executing something depends on executing something else*
 - Creating a stock depends on getting a database connection from the application
 - This way we can use the `db` inside the controller layer
+- `Depends` always have to come in the end of the function signature
+
+
+#### Background Tasks
+- Background tasks require the controller to be in the async mode
+- The API is similar to Celery
+- Inside the task, we are creating a new database session object and making persistent changes based on that
