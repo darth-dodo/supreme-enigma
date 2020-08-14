@@ -1,7 +1,7 @@
 # Fun with FastAPI
 
-- FastAPI is the "new kid on the block" with regards to Python frameworks
-- It is based on Starlette and brings several more cool features
+- [FastAPI](https://github.com/tiangolo/fastapi) is the "new kid on the block" with regards to Python frameworks
+- It is based on [Starlette](https://github.com/encode/starlette) and brings several more cool features
 - This demo is a rapid prototype created using Yahoo Finance APIs and fullstack FastAPI with Jinja2 templating engine
 - The application can take in multiple stock symbols through the UI and fetch the financial data asynchronously using FastAPI Background Tasks
 - The listing page offers basic query params based filtering
@@ -14,6 +14,12 @@
 - [Yahoo Finance](#yahoo-finance)
 - [Stocks Dashboard](#stocks-dashboard)
     - [Database Design](#database-design)
+    - [Creating Stocks](#creating-stocks)
+        - [Pydantic](#pydantic)
+        - [Dependency Injection](#dependency-injection)
+        - [Background Tasks](#background-tasks)
+    - [Information Display](#information-display)
+    - [API documentation](#api-documentation)
 
 ## Application Screenshots
 - Adding multiple stocks ![Adding multiple stocks](/screenshots/01_adding_multiple_stocks.png?raw=true "Adding multiple stocks")
@@ -105,3 +111,15 @@ sqlite>
 - Background tasks require the controller to be in the async mode
 - The API is similar to Celery
 - Inside the task, we are creating a new database session object and making persistent changes based on that
+
+
+### Information Display
+- The information is displayed on the homepage of the application
+- The data is rendered through a Jinja2 template which uses Semantic UI for styling and jQuery for bootstrapping javascript related work
+- New stocks can be added by making Ajax based POST request
+- The filters are used to generate query param based filtering for the application
+
+
+### API documentation
+- The API documentation can be found at http://localhost:8000/docs
+- The Insomnia collection is present over [here](https://github.com/darth-dodo/supreme-enigma/blob/master/Insomnia_2020-08-14.json) 
