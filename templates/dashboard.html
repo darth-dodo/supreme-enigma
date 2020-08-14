@@ -2,52 +2,122 @@
 
 {% block content %}
 
-<div class="ui input">
-    <input type="text" placeholder="P/E Ration">
-  </div>
 
-  <div class="ui input">
-    <input type="text" placeholder="Dividend Yield">
-  </div>
+<script>
+    $(document).ready(function () {
+        $("#addStocks").click(function () {
+            $(".ui.modal").modal("show");
+        })
 
-  <div class="ui checkbox">
-    <input type="checkbox" name="example">
-    <label>Above 50 day MA</label>
-  </div>
+        $("#save").click(function () {
 
-  <div class="ui checkbox">
-    <input type="checkbox" name="example">
-    <label>Above 200 day MA</label>
-  </div>
+            var symbols = $("#symbols").val();
+
+            var stockSymbols = symbols.split("\n")
+
+            console.log(stockSymbols);
+
+            for (var i = 0; i < stockSymbols.length; ++i) {
+                console.log(stockSymbols[i]);
+
+                $.ajax({
+                    url: "/stock",
+                    type: "POST",
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "symbol": stockSymbols[i] })
+                });
+            }
+
+            $(".ui.modal").modal("hide");
+
+        })
+    })
+</script>
 
 
+<form>
 
-  <button class="ui button primary">
+    <div class="ui input">
+        <input name="forward_pe" type="text" placeholder="P/E Ratio (Less than)" value={{ forward_pe }}>
+    </div>
+
+    <div class="ui input">
+        <input name="dividend_yield" type="text" placeholder="Dividend Yield (Greater than)" value={{ dividend_yield }}>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div class="ui checkbox">
+        <input name="ma50" type="checkbox" {% if ma50 %}checked="checked"{% endif %}>
+        <label>Above 50 day MA (Price less than MA50)</label>
+    </div>
+    <div class="ui checkbox">
+        <input name="ma200" type="checkbox" {% if ma200 %}checked="checked"{% endif %}>
+        <label>Above 200 day MA (Price less than MA200)</label>
+    </div>
+
+    <br/>
+    <br/>
+
+    <button id="filterSubmit" class="ui button primary">
     Filter
-  </button>
-  
+    </button>
+
+</form>
+
+<button id="addStocks" class="ui button">
+Add Stocks
+</button>
+
+
+
 <table class="ui celled table">
     <thead>
-      <tr><th>Symbol</th>
-      <th>P/E</th>
-      <th>Dividend Yield</th>
-    </tr></thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Forward P/E</th>
+            <th>Forward EPS</th>
+            <th>Dividend Yield</th>
+            <th>50 Day</th>
+            <th>200 Day</th>
+        </tr>
+    </thead>
     <tbody>
-      <tr>
-        <td data-label="Symbol">MSFT</td>
-        <td data-label="P/E">24</td>
-        <td data-label="Dividend Yield">32</td>
-      </tr>
-      <tr>
-        <td data-label="Symbol">AAPL</td>
-        <td data-label="P/E">26</td>
-        <td data-label="Dividend Yield">2</td>
-      </tr>
-      <tr>
-        <td data-label="Symbol">GOOG</td>
-        <td data-label="P/E">24</td>
-        <td data-label="Dividend Yield">1</td>
-      </tr>
+        {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.symbol or '-' }}</td>
+                <td>{{ stock.price or '-' }}</td>
+                <td>{{ stock.forward_pe or '-' }}</td>
+                <td>{{ stock.forward_eps or '-' }}</td>
+                <td>{{ stock.dividend_yield or '-' }}</td>
+                <td>{{ stock.ma50 or '-' }}</td>
+                <td>{{ stock.ma200 or '-' }}</td>
+            </tr>
+        {% endfor %}
     </tbody>
-  </table>
-{% endblock %} 
+</table>
+
+<div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Stock Symbol
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <div class="field">
+                <label>Enter Stock Symbol</label>
+                <textarea id="symbols"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div id="save" class="ui positive right labeled icon button">
+            Add Stocks
+            <i class="plus icon"></i>
+        </div>
+    </div>
+</div>
+{% endblock %}
