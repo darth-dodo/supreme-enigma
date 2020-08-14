@@ -4,10 +4,14 @@ app = FastAPI()
 
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+def dashboard():
+    """
+    Displays information about stocks in the system
+    """
+    return {"Dashboard": "Homepage"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, query: str = None):
-    return {"item_id": item_id, "query": query}
+@app.post("/stock")
+def create_stock():
+    """Creates a stock and saves it in the database"""
+    return {"code": "success", "message": "Stock added"}
