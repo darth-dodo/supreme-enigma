@@ -70,4 +70,9 @@ async def create_stock(
 
     background_tasks.add_task(fetch_stock_data, stock.id)
 
-    return {"code": "success", "message": "Stock added"}
+    return {
+        "code": "success",
+        "message": "Stock added",
+        "stock_id": stock.id,
+        "stock_symbol": stock.symbol,
+    }
