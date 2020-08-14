@@ -1,7 +1,13 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
+import models
+from database import SessionLocal, engine
+from sqlalchemy.orm import Session
+
 
 app = FastAPI()
+
+models.Base.metadata.create_all(bind=engine)
 
 templates = Jinja2Templates(directory="templates")
 
@@ -11,9 +17,7 @@ def dashboard(request: Request):
     """
     Displays information about stocks in the system
     """
-    return templates.TemplateResponse("dashboard.html", {
-        "request": request
-    })
+    return templates.TemplateResponse("dashboard.html", {"request": request})
 
 
 @app.post("/stock")
