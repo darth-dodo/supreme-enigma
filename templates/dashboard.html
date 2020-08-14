@@ -2,6 +2,16 @@
 
 {% block content %}
 
+
+<script>
+    $(document).ready(function() {
+        $("#addStocks").click(function() {
+            $(".ui.modal").modal("show");
+        });
+    })
+</script>
+
+
 <div class="ui input">
     <input type="text" placeholder="P/E Ration">
   </div>
@@ -26,6 +36,10 @@
     Filter
   </button>
   
+    <button id="addStocks" class="ui button">
+        Add Stocks
+    </button>
+
 <table class="ui celled table">
     <thead>
       <tr><th>Symbol</th>
@@ -50,4 +64,26 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Stock Symbol
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <div class="field">
+              <label>Enter Stock Symbol</label>
+              <textarea></textarea>
+            </div>
+          </div>
+    </div>
+
+    <div class="actions">
+      <div id="addStocks" class="ui positive right labeled icon button">
+        Add Stocks
+        <i class="plus icon"></i>
+      </div>
+    </div>
+  </div>
 {% endblock %} 
