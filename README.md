@@ -1,11 +1,25 @@
 # Fun with FastAPI
 
+- FastAPI is the "new kid on the block" with regards to Python frameworks
+- It is based on Starlette and brings several more cool features
+- The project is a rapid prototype created using Yahoo Finance APIs and fullstack FastAPI with Jinja2 templating engine
+- The application can take in multiple stock symbols through the UI and fetch the financial data asynchronously using FastAPI Background Tasks
+- The listing page offers basic query params based filtering
+- The screenshots can be found [screenshots](#application-screenshots)
+
 ## Table of contents:
+- [Application Screenshots](#application-screenshots)
 - [Setup and Install](#setup-and-install)
 - [Hello World demo](#hello-work-demo)
 - [Yahoo Finance](#yahoo-finance)
 - [Stocks Dashboard](#stocks-dashboard)
     - [Database Design](#database-design)
+
+## Application Screenshots
+- ![Adding multiple stocks](/screenshots/01_adding_multiple_stocks.png?raw=true "Adding multiple stocks")
+- ![Async data update using Background Tasks](/screenshots/02_async_data_fetch.png?raw=true "Async data update using Background Tasks")
+- ![Data persistance and Template Rendering](/screenshots/03_data_persistence_and_templating.png?raw=true "Data persistance and Template Rendering")
+- ![Filtering based on query params](/screenshots/04_query_params_based_filtering.png?raw=true "Filtering based on query params")
 
 ## Setup and Install
 - Install Pyenv and set the local python version to 3.8.3
