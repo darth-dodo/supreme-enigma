@@ -3,6 +3,7 @@
 ## Table of contents:
 - [Setup and Install](#setup-and-install)
 - [Hello World demo](#hello-work-demo)
+- [Yahoo Finance](#yahoo-finance)
 - [Stocks Dashboard](#stocks-dashboard)
     - [Database Design](#database-design)
 
@@ -20,6 +21,9 @@
 - Go to http://localhost:8000/items/12
 - Go to http://localhost:8000/items/12?query=apples%20are%20yummy
 
+## Yahoo Finance
+- The financial data is extracted using the Yahoo Finance library
+- A demo of the library is present in the file `yfinance_demo.py` where a sample response is documented as well
 
 ## Stocks Dashboard
 - Head to http:localhost:8000/docs for API documentation
@@ -48,3 +52,41 @@ CREATE UNIQUE INDEX ix_stocks_symbol ON stocks (symbol);
 CREATE INDEX ix_stocks_id ON stocks (id);
 sqlite> 
 ```
+
+
+### Creating Stocks
+- Pydantic to create `struct` or `POJO` equivalent for the incoming `POST` requests
+- Dependency Injection used to make sure we have database connection while we are making a request
+- Background Tasks for fetching the data from `yfinance` library
+
+#### Pydantic
+- Helps you structure your requests
+- Handles controller level datatype validation
+- Returns `422` response status code and descriptive payload in case of errors eg.
+```json
+{
+  "detail": [
+    {
+      "loc": [
+        "body",
+        "symbol"
+      ],
+      "msg": "field required",
+      "type": "value_error.missing"
+    }
+  ]
+}
+```
+
+
+#### Dependency Injection
+- *Executing something depends on executing something else*
+- Creating a stock depends on getting a database connection from the application
+- This way we can use the `db` inside the controller layer
+- `Depends` always have to come in the end of the function signature
+
+
+#### Background Tasks
+- Background tasks require the controller to be in the async mode
+- The API is similar to Celery
+- Inside the task, we are creating a new database session object and making persistent changes based on that
