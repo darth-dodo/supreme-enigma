@@ -48,3 +48,28 @@ CREATE UNIQUE INDEX ix_stocks_symbol ON stocks (symbol);
 CREATE INDEX ix_stocks_id ON stocks (id);
 sqlite> 
 ```
+
+
+### Creating Stocks
+- Pydantic to create `struct` or `POJO` equivalent for the incoming `POST` requests
+- Dependency Injection used to make sure we have database connection while we are making a request
+- Background Tasks for fetching the data from `yfinance` library
+
+#### Pydantic
+- Helps you structure your requests
+- Handles controller level datatype validation
+- Returns `422` response status code and descriptive payload in case of errors eg.
+```json
+{
+  "detail": [
+    {
+      "loc": [
+        "body",
+        "symbol"
+      ],
+      "msg": "field required",
+      "type": "value_error.missing"
+    }
+  ]
+}
+```
