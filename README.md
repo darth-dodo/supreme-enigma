@@ -3,6 +3,7 @@
 ## Table of contents:
 - [Setup and Install](#setup-and-install)
 - [Hello World demo](#hello-work-demo)
+- [Yahoo Finance](#yahoo-finance)
 - [Stocks Dashboard](#stocks-dashboard)
     - [Database Design](#database-design)
 
@@ -20,6 +21,9 @@
 - Go to http://localhost:8000/items/12
 - Go to http://localhost:8000/items/12?query=apples%20are%20yummy
 
+## Yahoo Finance
+- The financial data is extracted using the Yahoo Finance library
+- A demo of the library is present in the file `yfinance_demo.py` where a sample response is documented as well
 
 ## Stocks Dashboard
 - Head to http:localhost:8000/docs for API documentation
